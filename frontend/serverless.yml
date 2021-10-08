@@ -1,0 +1,21 @@
+org: superdoug
+app: serverlesstemplate
+frameworkVersion: '2'
+projectDir: ../
+service: client
+
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: dougserverlesstemplate
+    distributionFolder: build
+
+provider: 
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  profile: serverless_admin
