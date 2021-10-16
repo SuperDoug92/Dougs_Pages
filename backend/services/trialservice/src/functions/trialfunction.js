@@ -50,16 +50,23 @@ const scopeCheck = (event, required_scopes) => {
 }
 
 module.exports.trialfunction = async (event, context) => {
-  console.log('TrialFunctionEvent: ',event);
+  console.log('TrialFunctionEvent: ', event);
   console.log('Trialfunction authorizer: ', event.requestContext.authorizer)
+  //check audience
+  const audCheck = true;
+  //check scope
+  const scopeCheck = true;
+
   // console.log('TrialFunctionContext: ',context);
 
-  const authObj = await scopeCheck(event, 'read:response')
-  const audience = event.requestContext.authorizer.audience.split('|')
-  const audienceCheck = (audience.includes('https://p8ybzhtnn1.execute-api.us-east-1.amazonaws.com/dev/v1/trialfunction') ? true : false);
-  console.log('authObj: ', authObj)
-  console.log('audienceCheck: ', audienceCheck)
-  if (authObj.authorized && audienceCheck){
+  // const authObj = true;
+  // await scopeCheck(event, 'read:response')
+  // const audience = event.requestContext.authorizer.aud.split('|')
+  // const audienceCheck = true;
+  // (audience.includes('https://p8ybzhtnn1.execute-api.us-east-1.amazonaws.com/dev/v1/trialfunction') ? true : false);
+  // console.log('authObj: ', authObj)
+  // console.log('audienceCheck: ', audienceCheck)
+  if (scopeCheck && audCheck){
     return {
       statusCode: 200,
         headers: {

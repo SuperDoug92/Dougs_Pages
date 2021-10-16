@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-// const authConfig = () =>("../auth_config.json")
+
+const domain = () =>("../auth_config.json").domain
 
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -8,15 +9,12 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserMetadata = async () => {
-      const domain = "dev-3nlm70j6.us.auth0.com";
-      // console.log(user)
       
       try {
         const accessToken = await getAccessTokenSilently({
           audience: `https://${domain}/api/v2/`,
           scope: "read:current_user",
         });
-        // console.log('profile access token: ', accessToken)
   
         const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
   

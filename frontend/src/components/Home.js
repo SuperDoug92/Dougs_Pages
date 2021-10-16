@@ -1,12 +1,12 @@
 import { Fragment } from "react";
-import {Navbar, Nav, Container, Button} from 'react-bootstrap';
-import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
-import Profile from "./Profile";
-import Trialfunction from './Trialfunction';
-import { useAuth0 } from "@auth0/auth0-react";
+import {Nav} from 'react-bootstrap';
+// import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+// import Profile from "./Profile";
+// import Trialfunction from './Trialfunction';
+// import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = ()=>{
-    const { isAuthenticated } = useAuth0();
+    // const { isAuthenticated } = useAuth0();
 
     return(
         <Fragment>

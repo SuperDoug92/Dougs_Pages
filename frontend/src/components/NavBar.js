@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import {Navbar, Nav, Container, Button} from 'react-bootstrap';
-import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Profile from "./Profile";
 import Trialfunction from './Trialfunction';
 import Home from './Home';
@@ -28,13 +28,13 @@ const NavBar = ()=>{
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Router>
+            {/* <Router> */}
                 <Switch>
                     <Route path='/profile' component={Profile}/>
                     <Route path='/trialfunction' component={Trialfunction}/>
                     <Route path='/'  component={Home}/>
                 </Switch>
-            </Router>
+            {/* </Router> */}
         </Fragment>
     )
 }

@@ -24,10 +24,13 @@ functions:
 
 plugins:
   - serverless-mocha
+  - serverless-offline
 custom:
   serverless-mocha-plugin:
     testTemplate: templates/test-template.ejs
     functionTemplate: templates/function-template.ejs
+  serverless-offline:
+    httpPort: #!update!#
 
 package:
   patterns:

@@ -5,13 +5,16 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Auth0ProviderWithHistory from "./auth0ProviderWithHistory";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <Auth0ProviderWithHistory>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Auth0ProviderWithHistory>,
+  <Router>
+    <Auth0ProviderWithHistory>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Auth0ProviderWithHistory>
+  </Router>,
   document.getElementById("root")
 );
 

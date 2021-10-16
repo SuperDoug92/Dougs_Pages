@@ -1,7 +1,6 @@
 org: superdoug
 app: serverlesstemplate
 service: trialservice
-
 frameworkVersion: "2"
 
 provider:
@@ -10,18 +9,40 @@ provider:
   lambdaHashingVersion: 20201221
   stage: ${opt:stage, 'dev'}
   region: us-east-1
+  httpApi:
+    cors:
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+        - OPTIONS
+      allowedOrigins:
+        - http://localhost:3000
+    authorizers:
+      jwtAuthorizer:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: https://dev-3nlm70j6.us.auth0.com/
+        audience:
+          - " https://auth0-jwt-authorizer"
+        # scopes: # Optional
+        #       - user.id
+        #       - user.email
 
 functions:
   trialfunction:
     handler: src/functions/trialfunction.trialfunction
     events:
-      - http:
+      - httpApi:
           method: get
-          cors: true
           path: /v1/trialfunction
           authorizer:
-            arn: arn:aws:lambda:us-east-1:789699194703:function:authorization-dev-auth
-            type: token
+            name: jwtAuthorizer
+            scopes:
+              - read:response
+            # ${self:custom.auth.${opt:stage, self:provider.stage}}
+            # type: token
 
 plugins:
   - serverless-mocha
@@ -30,7 +51,13 @@ custom:
   serverless-mocha-plugin:
     testTemplate: templates/test-template.ejs
     functionTemplate: templates/function-template.ejs
-
+  serverless-offline:
+    httpPort: 3001
+  # auth:
+  #   prod:
+  #   dev:
+  #     arn: arn:aws:lambda:us-east-1:789699194703:function:authorization-dev-auth
+  #   offline:
 package:
   patterns:
     - "!package-lock.json"
