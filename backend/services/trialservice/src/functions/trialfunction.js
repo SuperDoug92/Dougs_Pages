@@ -10,10 +10,10 @@ module.exports.trialfunction = async (event, context) => {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true,
       },
-    body: JSON.stringify({
+    body: {
       message: 'Trial function executed successfully!',
       input: event
-    })
+    }
   }
 }
 

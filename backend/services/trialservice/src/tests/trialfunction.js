@@ -9,14 +9,17 @@ let wrapped = mochaPlugin.getWrapper('trialfunction', '../../../src/functions/tr
 const AWS = require('aws-sdk-mock')
 const AWS_SDK = require('aws-sdk')
 AWS.setSDKInstance(AWS_SDK)
+var assert = require('chai').assert
 
 describe('trialfunction', () => {
   before((done) => {
     done();
   });
+  //Auth fails
 
+  //Auth passes
   it('implement tests here', async () => {
     const response = await wrapped.run({});
-    expect(response).to.not.be.empty;
+    assert.equal(response.body.message, 'Trial function executed successfully!');
   });
 });
