@@ -35,6 +35,7 @@ functions:
     handler: src/functions/trialfunction.trialfunction
     events:
       - httpApi:
+          payload: "2.0"
           method: get
           path: /v1/trialfunction
           authorizer:
