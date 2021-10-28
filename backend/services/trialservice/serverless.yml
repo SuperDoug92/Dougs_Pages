@@ -26,9 +26,6 @@ provider:
         issuerUrl: https://dev-3nlm70j6.us.auth0.com/
         audience:
           - " https://auth0-jwt-authorizer"
-        # scopes: # Optional
-        #       - user.id
-        #       - user.email
 
 functions:
   trialfunction:
@@ -42,8 +39,6 @@ functions:
             name: jwtAuthorizer
             scopes:
               - read:response
-            # ${self:custom.auth.${opt:stage, self:provider.stage}}
-            # type: token
 
 plugins:
   - serverless-mocha
@@ -54,11 +49,6 @@ custom:
     functionTemplate: templates/function-template.ejs
   serverless-offline:
     httpPort: 3001
-  # auth:
-  #   prod:
-  #   dev:
-  #     arn: arn:aws:lambda:us-east-1:789699194703:function:authorization-dev-auth
-  #   offline:
 package:
   patterns:
     - "!package-lock.json"

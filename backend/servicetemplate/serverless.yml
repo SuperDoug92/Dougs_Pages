@@ -1,7 +1,8 @@
+frameworkVersion: "2"
+
 org: superdoug
 app: serverlesstemplate
 service: #!update!#
-
 frameworkVersion: "2"
 
 provider:
@@ -10,28 +11,46 @@ provider:
   lambdaHashingVersion: 20201221
   stage: ${opt:stage, 'dev'}
   region: us-east-1
+  httpApi:
+    cors:
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+        - OPTIONS
+      allowedOrigins:
+        - http://localhost:3000
+    authorizers:
+      jwtAuthorizer:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: https://dev-3nlm70j6.us.auth0.com/
+        audience:
+          - " https://auth0-jwt-authorizer"
+
 functions:
   #!update!#:
-  handler: src/functions/ #!update!#.#!update!#
-  events:
-    - http:
-        method: #!update!#
-        cors: true
-        path: /v1/ #!update!#
-        authorizer:
-          arn: arn:aws:lambda:us-east-1:789699194703:function:authorization-dev-auth
-          type: token
+    handler: src/functions/ #!update!#.#!update!#
+    events:
+      - httpApi:
+          payload: "2.0"
+          method: get
+          path: /v1/ #!update!#
+          authorizer:
+            name: jwtAuthorizer
+            scopes:
+              - read:response
 
 plugins:
   - serverless-mocha
   - serverless-offline
 custom:
   serverless-mocha-plugin:
-    testTemplate: templates/test-template.ejs
-    functionTemplate: templates/function-template.ejs
+    testTemplate: ../../servicetemplate/src/templates/test-template.ejs
+    functionTemplate: ../../servicetemplate/src/templates/function-template.ejs
   serverless-offline:
-    httpPort: #!update!#
-
+    httpPort: 3001
 package:
   patterns:
     - "!package-lock.json"
