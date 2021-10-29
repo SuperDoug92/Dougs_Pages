@@ -1,6 +1,6 @@
 org: superdoug
 app: serverlesstemplate
-service: #!update!#
+service: pages
 frameworkVersion: "2"
 
 provider:
@@ -28,21 +28,22 @@ provider:
           - " https://auth0-jwt-authorizer"
 
 functions:
-  # functionName:
-  # handler: src/functions/ #!update!#.#!update!#
-  # events:
-  #   - httpApi:
-  #       payload: "2.0"
-  #       method: get
-  #       path: /v1/ #!update!#
-  #       authorizer:
-  #         name: jwtAuthorizer
-  #         scopes:
-  #           - read:response
+# functionName:
+# handler: src/functions/ #!update!#.#!update!#
+# events:
+#   - httpApi:
+#       payload: "2.0"
+#       method: get
+#       path: /v1/ #!update!#
+#       authorizer:
+#         name: jwtAuthorizer
+#         scopes:
+#           - read:response
 
 plugins:
-  - serverless-mocha
+  # - serverless-mocha-plugin
   - serverless-offline
+  - serverless-mocha
 custom:
   serverless-mocha-plugin:
     testTemplate: ../../../backend/servicetemplate/templates/test-template.ejs
