@@ -1,5 +1,15 @@
 #!/bin/bash
-#sls print to see resolved yaml
+#to see resolved yaml:
+#sls print
+#
+#to run backend offline:
+#serverless offline --ignoreJWTSignature
+#
+#to build frontend:
+#npm run build
+#
+#to deploy frontend:
+#sls client deploy
 
 slsh(){
     if [ $1 == 'new' ]

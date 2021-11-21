@@ -1,5 +1,11 @@
 {
   "trialfunction": {
-      "url": "https://oomqnguufg.execute-api.us-east-1.amazonaws.com/v1/trialfunction"
+    "url": "https://oomqnguufg.execute-api.us-east-1.amazonaws.com/v1/trialfunction"
+  },
+  "pages": {
+    "url": "https://440lu5fd07.execute-api.us-east-1.amazonaws.com/v1/pages"
+  },
+  "alttrialfunction": {
+    "url": "http://localhost:3003/v1/trialfunction"
   }
 }

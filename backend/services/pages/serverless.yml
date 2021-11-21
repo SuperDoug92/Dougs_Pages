@@ -10,6 +10,12 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: us-east-1
   httpApi:
+    authorizers:
+      jwtAuthorizer:
+        identitySource: $request.header.Authorization
+        issuerUrl: https://dev-3nlm70j6.us.auth0.com/
+        audience:
+          - "DougsPagesAuthorizer"
     cors:
       allowedHeaders:
         - Content-Type
@@ -19,29 +25,21 @@ provider:
         - OPTIONS
       allowedOrigins:
         - http://localhost:3000
-    authorizers:
-      jwtAuthorizer:
-        type: jwt
-        identitySource: $request.header.Authorization
-        issuerUrl: https://dev-3nlm70j6.us.auth0.com/
-        audience:
-          - " https://auth0-jwt-authorizer"
+        - https://dougspages.io
 
 functions:
-# functionName:
-# handler: src/functions/ #!update!#.#!update!#
-# events:
-#   - httpApi:
-#       payload: "2.0"
-#       method: get
-#       path: /v1/ #!update!#
-#       authorizer:
-#         name: jwtAuthorizer
-#         scopes:
-#           - read:response
+  pages:
+    handler: src/functions/pages.pages
+    events:
+      - httpApi:
+          method: get
+          path: /v1/pages
+          authorizer:
+            name: jwtAuthorizer
+            scopes:
+              - read:response
 
 plugins:
-  # - serverless-mocha-plugin
   - serverless-offline
   - serverless-mocha
 custom:
